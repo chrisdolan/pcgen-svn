@@ -46,6 +46,7 @@ import pcgen.cdom.enumeration.ObjectKey;
 import pcgen.cdom.inst.PCClassLevel;
 import pcgen.core.Equipment;
 import pcgen.core.Globals;
+import pcgen.core.GlobalsForUI;
 import pcgen.core.PCClass;
 import pcgen.core.PlayerCharacter;
 import pcgen.core.Race;
@@ -361,8 +362,8 @@ public class EncounterPlugin extends GMBPlugin implements ActionListener,
 	{
 		int i;
 		PlayerCharacter aPC;
-		JFrame oldRoot = Globals.getRootFrame();
-		Globals.setRootFrame(GMGenSystem.inst);
+		JFrame oldRoot = GlobalsForUI.getRootFrame();
+		GlobalsForUI.setRootFrame(GMGenSystem.inst);
 		theModel.setPCs(theModel.size());
 
 		try
@@ -407,7 +408,7 @@ public class EncounterPlugin extends GMBPlugin implements ActionListener,
 			e.printStackTrace();
 		}
 
-		Globals.setRootFrame(oldRoot);
+		GlobalsForUI.setRootFrame(oldRoot);
 	}
 
 	/**

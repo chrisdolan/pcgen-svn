@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javax.swing.event.EventListenerList;
+import pcgen.util.EventListenerList;
 
 import pcgen.base.util.WrappedMapSet;
 import pcgen.cdom.base.CDOMList;

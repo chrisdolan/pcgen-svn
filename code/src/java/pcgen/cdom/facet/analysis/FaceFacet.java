@@ -17,7 +17,6 @@
  */
 package pcgen.cdom.facet.analysis;
 
-import java.awt.geom.Point2D;
 import java.math.BigDecimal;
 
 import pcgen.cdom.base.CDOMObject;
@@ -27,6 +26,7 @@ import pcgen.cdom.facet.model.RaceFacet;
 import pcgen.cdom.facet.model.TemplateFacet;
 import pcgen.core.PCTemplate;
 import pcgen.core.Race;
+import pcgen.util.Point;
 
 /**
  * FaceFacet is a Facet that tracks the Face of a Player Character (in game
@@ -52,14 +52,14 @@ public class FaceFacet
 	 *            Face will be returned
 	 * @return The Face of the Player Character represented by the given CharID
 	 */
-	public Point2D.Double getFace(CharID id)
+	public pcgen.util.Point getFace(CharID id)
 	{
 		final Race aRace = raceFacet.get(id);
 		// Default to 5' by 5'
-		Point2D.Double face = new Point2D.Double(5, 0);
+		Point face = new pcgen.util.Point(5, 0);
 		if (aRace != null)
 		{
-			Point2D.Double rf = getFace(aRace);
+			Point rf = getFace(aRace);
 			if (rf != null)
 			{
 				face = rf;
@@ -69,7 +69,7 @@ public class FaceFacet
 		// Scan templates for any overrides
 		for (PCTemplate template : templateFacet.getSet(id))
 		{
-			Point2D.Double tf = getFace(template);
+			Point tf = getFace(template);
 			if (tf != null)
 			{
 				face = tf;
@@ -87,7 +87,7 @@ public class FaceFacet
 	 * @return The Point2D indicating the Face as defined by the given
 	 *         CDOMObject.
 	 */
-	private Point2D.Double getFace(CDOMObject cdo)
+	private Point getFace(CDOMObject cdo)
 	{
 		BigDecimal width = cdo.get(ObjectKey.FACE_WIDTH);
 		BigDecimal height = cdo.get(ObjectKey.FACE_HEIGHT);
@@ -95,7 +95,7 @@ public class FaceFacet
 		{
 			return null;
 		}
-		return new Point2D.Double(width.doubleValue(), height.doubleValue());
+		return new Point(width.doubleValue(), height.doubleValue());
 	}
 
 	public void setTemplateFacet(TemplateFacet templateFacet)

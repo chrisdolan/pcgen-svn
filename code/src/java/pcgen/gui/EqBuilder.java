@@ -78,6 +78,7 @@ import pcgen.cdom.enumeration.Type;
 import pcgen.core.Equipment;
 import pcgen.core.EquipmentModifier;
 import pcgen.core.Globals;
+import pcgen.core.GlobalsForUI;
 import pcgen.core.PObject;
 import pcgen.core.PlayerCharacter;
 import pcgen.core.SettingsHandler;
@@ -455,7 +456,7 @@ final class EqBuilder extends JPanel
 				//getRootPane().getParent().requestFocus();
 				((EQFrame)getRootPane().getParent()).setVisible(true);
 				((EQFrame)getRootPane().getParent()).toFront();
-				Globals.getCurrentFrame().requestFocus();
+				GlobalsForUI.getCurrentFrame().requestFocus();
 			}
 		}
 	}

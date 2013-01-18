@@ -26,7 +26,7 @@ import java.util.IdentityHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.swing.event.EventListenerList;
+import pcgen.util.EventListenerList;
 
 import pcgen.cdom.enumeration.CharID;
 import pcgen.cdom.facet.base.AbstractStorageFacet;

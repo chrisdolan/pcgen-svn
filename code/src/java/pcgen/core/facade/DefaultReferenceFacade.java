@@ -20,7 +20,7 @@
  */
 package pcgen.core.facade;
 
-import javax.swing.event.EventListenerList;
+import pcgen.util.EventListenerList;
 import org.apache.commons.lang.ObjectUtils;
 import pcgen.core.facade.event.ReferenceEvent;
 import pcgen.core.facade.event.ReferenceListener;

@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 
-import javax.swing.event.EventListenerList;
+import pcgen.util.EventListenerList;
 
 import pcgen.base.lang.CaseInsensitiveString;
 import pcgen.base.util.FixedStringList;

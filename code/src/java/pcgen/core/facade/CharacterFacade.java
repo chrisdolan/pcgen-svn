@@ -20,13 +20,10 @@
  */
 package pcgen.core.facade;
 
-import java.awt.Rectangle;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.List;
-
-import javax.swing.undo.UndoManager;
 
 import pcgen.cdom.enumeration.BiographyField;
 import pcgen.cdom.enumeration.Nature;
@@ -37,6 +34,7 @@ import pcgen.core.facade.event.ChangeListener;
 import pcgen.core.facade.util.DefaultListFacade;
 import pcgen.core.facade.util.ListFacade;
 import pcgen.io.ExportHandler;
+import pcgen.util.Rectangle;
 
 /**
  * The CharacterFacade interface provides a key role in separation
@@ -61,7 +59,7 @@ public interface CharacterFacade extends CompanionFacade
 
 	public InfoFactory getInfoFactory();
 
-	public UndoManager getUndoManager();
+    // public UndoManager getUndoManager();
 
 	public ReferenceFacade<GenderFacade> getGenderRef();
 

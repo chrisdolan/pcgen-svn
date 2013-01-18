@@ -25,7 +25,6 @@ package pcgen.gui2.facade;
 import gmgen.pluginmgr.GMBus;
 import gmgen.pluginmgr.messages.PCClosedMessage;
 
-import java.awt.Rectangle;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
@@ -41,8 +40,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import javax.swing.undo.UndoManager;
 
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
@@ -171,6 +168,7 @@ import pcgen.system.CharacterManager;
 import pcgen.system.LanguageBundle;
 import pcgen.system.PCGenSettings;
 import pcgen.util.Logging;
+import pcgen.util.Rectangle;
 import pcgen.util.enumeration.Load;
 
 /**
@@ -201,7 +199,7 @@ public class CharacterFacadeImpl implements CharacterFacade, EquipmentListListen
 	private DefaultReferenceFacade<GenderFacade> gender;
 	private DefaultListFacade<CharacterLevelFacade> pcClassLevels;
 	private Map<StatFacade, DefaultReferenceFacade<Integer>> statScoreMap;
-	private UndoManager undoManager;
+//	private UndoManager undoManager;
 	private DataSetFacade dataSet;
 	private DefaultReferenceFacade<RaceFacade> race;
 	private DefaultReferenceFacade<DeityFacade> deity;
@@ -284,7 +282,7 @@ public class CharacterFacadeImpl implements CharacterFacade, EquipmentListListen
 		dataSet = dataSetFacade;
 		buildAgeCategories();
 		initForCharacter();
-		undoManager = new UndoManager();
+//		undoManager = new UndoManager();
 	}
 
 	/**
@@ -1855,14 +1853,14 @@ public class CharacterFacadeImpl implements CharacterFacade, EquipmentListListen
 		return ((float) pcClassLevels.getIndexOfElement(level) + 4) / cost.getCost();
 	}
 
-	/* (non-Javadoc)
-	 * @see pcgen.core.facade.CharacterFacade#getUndoManager()
-	 */
-	@Override
-	public UndoManager getUndoManager()
-	{
-		return undoManager;
-	}
+    // /* (non-Javadoc)
+    // * @see pcgen.core.facade.CharacterFacade#getUndoManager()
+    // */
+    // @Override
+    // public UndoManager getUndoManager()
+    // {
+    // return undoManager;
+    // }
 
 	/* (non-Javadoc)
 	 * @see pcgen.core.facade.CharacterFacade#getRaceRef()
@@ -2633,7 +2631,7 @@ public class CharacterFacadeImpl implements CharacterFacade, EquipmentListListen
 			|| theCharacter.getSerial() != lastExportCharSerial)
 		{
 			lastExportCharSerial = theCharacter.getSerial();
-			exportPc = (PlayerCharacter) theCharacter.clone();
+			exportPc = theCharacter.clone();
 
 			// Get the PC all up to date, (equipment and active bonuses etc)
 			exportPc.preparePCForOutput();
@@ -4091,7 +4089,7 @@ public class CharacterFacadeImpl implements CharacterFacade, EquipmentListListen
 		 * @param rect
 		 */
 		public RectangleReference(Rectangle rect) {
-			this.object = rect == null ? null : (Rectangle) rect.clone();
+			this.object = rect == null ? null : new Rectangle(rect);
 		}
 
 		@Override
@@ -4100,7 +4098,7 @@ public class CharacterFacadeImpl implements CharacterFacade, EquipmentListListen
 			Rectangle rect = object;
 			if (rect != null)
 			{
-				rect = (Rectangle) rect.clone();
+				rect = new Rectangle(rect);
 			}
 			return rect;
 		}
@@ -4114,13 +4112,13 @@ public class CharacterFacadeImpl implements CharacterFacade, EquipmentListListen
 			}
 			if (rect != null)
 			{
-				rect = (Rectangle) rect.clone();
+				rect = new Rectangle(rect);
 			}
 			Rectangle old = this.object;
 			this.object = rect;
 			if (rect != null)
 			{
-				rect = (Rectangle) rect.clone();
+				rect = new Rectangle(rect);
 			}
 			fireReferenceChangedEvent(this, old, rect);
 		}

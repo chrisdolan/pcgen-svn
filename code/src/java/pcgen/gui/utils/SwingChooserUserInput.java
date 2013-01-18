@@ -60,6 +60,7 @@ import javax.swing.table.TableModel;
 
 import pcgen.cdom.base.Constants;
 import pcgen.core.Globals;
+import pcgen.core.GlobalsForUI;
 import pcgen.gui.utils.chooser.ChooserTableModel;
 import pcgen.system.LanguageBundle;
 import pcgen.util.chooser.ChooserInterface;
@@ -177,7 +178,7 @@ public final class SwingChooserUserInput extends JDialog implements ChooserInter
 	 */
 	public SwingChooserUserInput()
 	{
-		super(Globals.getCurrentFrame());
+		super(GlobalsForUI.getCurrentFrame());
 		initComponents();
 	}
 

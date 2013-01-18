@@ -18,9 +18,8 @@
  */
 package pcgen.cdom.facet.fact;
 
-import java.awt.Rectangle;
-
 import pcgen.cdom.facet.base.AbstractItemFacet;
+import pcgen.util.Rectangle;
 
 /**
  * PortraitThumbnailRectFacet is a Facet that tracks the thumbnail rectangle for 

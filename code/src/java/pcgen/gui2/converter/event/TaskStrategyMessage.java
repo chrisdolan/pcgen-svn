@@ -19,7 +19,7 @@
  */
 package pcgen.gui2.converter.event;
 
-import javax.swing.event.EventListenerList;
+import pcgen.util.EventListenerList;
 
 public final class TaskStrategyMessage
 {

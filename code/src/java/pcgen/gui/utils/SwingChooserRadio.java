@@ -26,7 +26,7 @@
 package pcgen.gui.utils;
 
 import pcgen.cdom.base.Constants;
-import pcgen.core.Globals;
+import pcgen.core.GlobalsForUI;
 import pcgen.gui2.tools.Utility;
 import pcgen.system.LanguageBundle;
 import pcgen.util.chooser.ChooserRadio;
@@ -91,7 +91,7 @@ public final class SwingChooserRadio extends JDialog implements ChooserRadio
 	 **/
 	public SwingChooserRadio()
 	{
-		super(Globals.getRootFrame());
+		super(GlobalsForUI.getRootFrame());
 		initComponents();
 	}
 

@@ -22,7 +22,6 @@
  */
 package plugin.exporttokens;
 
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -31,6 +30,7 @@ import javax.imageio.ImageIO;
 import pcgen.AbstractCharacterTestCase;
 import pcgen.cdom.base.Constants;
 import pcgen.core.PlayerCharacter;
+import pcgen.util.Rectangle;
 
 /**
  * The Class <code>PortraitTokenTest</code> checks the function of PortraitToken.

@@ -24,7 +24,6 @@
  */
 package pcgen.core;
 
-import java.awt.Rectangle;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -1962,9 +1961,9 @@ public class PlayerCharacter  implements Cloneable, VariableContainer, Associati
 	 * Set a new outline for the portrait thumbnail.
 	 * @param rect The thumbnail outline.
 	 */
-	public void setPortraitThumbnailRect(Rectangle rect)
+	public void setPortraitThumbnailRect(pcgen.util.Rectangle rect)
 	{
-		portraitThumbnailRectFacet.set(id, (Rectangle) rect.clone());
+		portraitThumbnailRectFacet.set(id, rect);
 	}
 
 	/**

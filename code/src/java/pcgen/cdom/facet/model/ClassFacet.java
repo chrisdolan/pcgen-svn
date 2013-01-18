@@ -25,7 +25,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-import javax.swing.event.EventListenerList;
+import pcgen.util.EventListenerList;
 
 import pcgen.cdom.enumeration.CharID;
 import pcgen.cdom.enumeration.IntegerKey;

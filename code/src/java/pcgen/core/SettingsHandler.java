@@ -1575,10 +1575,10 @@ public final class SettingsHandler
 
 		setPCGenOption("windowState",getWindowState()); //$NON-NLS-1$
 
-		if (Globals.getRootFrame() != null)
+		if (GlobalsForUI.getRootFrame() != null)
 		{
-			setPCGenOption("windowWidth", Globals.getRootFrame().getSize().getWidth()); //$NON-NLS-1$
-			setPCGenOption("windowHeight", Globals.getRootFrame().getSize().getHeight()); //$NON-NLS-1$
+			setPCGenOption("windowWidth", GlobalsForUI.getRootFrame().getSize().getWidth()); //$NON-NLS-1$
+			setPCGenOption("windowHeight", GlobalsForUI.getRootFrame().getSize().getHeight()); //$NON-NLS-1$
 		}
 
 		if (getCustomizerLeftUpperCorner() != null)
@@ -2604,7 +2604,7 @@ public final class SettingsHandler
 		// toolTip state change, and menu checkbox state change are
 		// handled in gui code pcGenGUI.java just after returning
 		// from this method.
-		if (((Globals.javaVersionMajor >= 1) && (Globals.javaVersionMinor >= 4))
+		if ((((Globals.javaVersionMajor == 1) && (Globals.javaVersionMinor >= 4)) || (Globals.javaVersionMajor > 1))
 			|| !SystemUtils.IS_OS_MAC)
 		//(! SystemUtils.IS_OS_LINUX))
 		{

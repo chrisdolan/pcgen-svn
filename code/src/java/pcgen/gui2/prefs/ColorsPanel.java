@@ -37,7 +37,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
-import pcgen.core.Globals;
+import pcgen.core.GlobalsForUI;
 import pcgen.gui2.UIPropertyContext;
 import pcgen.gui2.tools.Utility;
 import pcgen.system.LanguageBundle;
@@ -215,7 +215,7 @@ public class ColorsPanel extends PCGenPrefsPanel
 				|| (source == featVirtualColor))
 			{
 				final Color newColor =
-						JColorChooser.showDialog(Globals.getRootFrame(),
+						JColorChooser.showDialog(GlobalsForUI.getRootFrame(),
 							LanguageBundle.getString("in_Prefs_colorSelect")
 								+ source.getText().toLowerCase(), source
 								.getForeground());

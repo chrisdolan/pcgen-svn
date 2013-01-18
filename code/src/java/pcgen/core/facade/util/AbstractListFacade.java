@@ -22,7 +22,7 @@ package pcgen.core.facade.util;
 
 import java.util.AbstractList;
 import java.util.Iterator;
-import javax.swing.event.EventListenerList;
+import pcgen.util.EventListenerList;
 import pcgen.core.facade.event.ListEvent;
 import pcgen.core.facade.event.ListListener;
 

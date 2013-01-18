@@ -40,8 +40,6 @@ import java.util.StringTokenizer;
 import java.util.TreeMap;
 import java.util.logging.Level;
 
-import javax.swing.JFrame;
-
 import org.apache.commons.lang.SystemUtils;
 
 import pcgen.base.util.RandomUtil;
@@ -99,13 +97,30 @@ public final class Globals
 	/** These are system constants */
 	public static final String javaVersion      = System.getProperty("java.version"); //$NON-NLS-1$
 	/** Java Version Major */
-	public static final int    javaVersionMajor =
-		Integer.valueOf(javaVersion.substring(0,
-				javaVersion.indexOf('.'))).intValue();
+	public static final int javaVersionMajor;
 	/** Java Version Minor */
-	public static final int    javaVersionMinor =
-		Integer.valueOf(javaVersion.substring(javaVersion.indexOf('.') + 1,
-				javaVersion.lastIndexOf('.'))).intValue();
+	public static final int javaVersionMinor;
+	static {
+		if ("0".equals(javaVersion)) {
+			// On Android, the Java version is declared as "0". Hack in some approximate values
+			javaVersionMajor = 1;
+			javaVersionMinor = 6;
+		} else {
+			int dotIndex = javaVersion.indexOf('.');
+			if (dotIndex < 0) {
+				javaVersionMajor = Integer.valueOf(javaVersion);
+				javaVersionMinor = 0;
+			} else {
+				int lastDotIndex = javaVersion.lastIndexOf('.');
+				javaVersionMajor =
+						Integer.valueOf(javaVersion.substring(0, dotIndex)).intValue();
+				javaVersionMinor =
+						Integer.valueOf(lastDotIndex > dotIndex ?
+								javaVersion.substring(dotIndex + 1, lastDotIndex) :
+									javaVersion.substring(dotIndex + 1)).intValue();
+			}
+		}
+	}
 
 	/** NOTE: The defaultPath is duplicated in LstSystemLoader. */
 	private static final String defaultPcgPath = Globals.getUserFilesPath() + File.separator + "characters"; //$NON-NLS-1$
@@ -127,8 +142,6 @@ public final class Globals
 	private static List<Campaign> campaignList          = new ArrayList<Campaign>(85);
 
 	// end of filter creation sets
-	private static JFrame rootFrame;
-	private static JFrame currentFrame;
 	private static final StringBuilder section15 = new StringBuilder(30000);
 	private static final String spellPoints = "0";
 
@@ -616,50 +629,6 @@ public final class Globals
 				.getItemInOrder(PaperInfo.class, idx);
 
 		return pi.getPaperInfo(infoType);
-	}
-
-	/**
-	 * Sets the root frame
-	 * The root frame is the container in which all
-	 * other panels, frame etc are placed.
-	 *
-	 * @param frame the <code>PCGen_Frame1</code> which is to be root
-	 */
-	public static void setRootFrame(final JFrame frame)
-	{
-		rootFrame = frame;
-	}
-
-	/**
-	 * Returns the current root frame.
-	 *
-	 * @return the <code>rootFrame</code> property
-	 */
-	public static JFrame getRootFrame()
-	{
-		return rootFrame;
-	}
-
-	/**
-	 * Set the current frame
-	 * @param frame
-	 */
-	public static void setCurrentFrame(final JFrame frame)
-	{
-		currentFrame = frame;
-	}
-
-	/**
-	 * Get the current frame
-	 * @return current frame
-	 */
-	public static JFrame getCurrentFrame()
-	{
-		if (currentFrame == null)
-		{
-			return rootFrame;
-		}
-		return currentFrame;
 	}
 
 	/**
@@ -1195,7 +1164,7 @@ public final class Globals
 			{
 				//TODO: This must be refactored away. Core shouldn't know about gui.
 				final InputInterface ii = InputFactory.getInputInstance();
-				final Object selectedValue = ii.showInputDialog(Globals.getRootFrame(),
+				final Object selectedValue = ii.showInputDialog(GlobalsForUI.getRootFrame(),
 					"Randomly generate a number between " + min + " and " + max
 						+ "." + Constants.LINE_SEPARATOR
 						+ "Select it from the box below.",

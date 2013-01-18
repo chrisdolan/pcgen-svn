@@ -31,7 +31,7 @@ import javax.swing.JDialog;
 import javax.swing.WindowConstants;
 
 import pcgen.core.Equipment;
-import pcgen.core.Globals;
+import pcgen.core.GlobalsForUI;
 import pcgen.core.PlayerCharacter;
 import pcgen.core.SettingsHandler;
 import pcgen.gui.utils.IconUtilitities;
@@ -168,7 +168,7 @@ public final class EQFrame extends JDialog
 			//SettingsHandler.writeOptionsProperties(aPC);
 		}
 
-		Globals.setCurrentFrame(null);
+		GlobalsForUI.setCurrentFrame(null);
 		this.dispose();
 	}
 

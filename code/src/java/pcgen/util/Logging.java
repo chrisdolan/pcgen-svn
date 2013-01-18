@@ -52,8 +52,24 @@ import pcgen.core.SettingsHandler;
  */
 public class Logging
 {
+	private interface Beeper {
+		void beep();
+	}
+	private static final class BeeperImpl implements Beeper {
+		private final Toolkit s_TOOLKIT = Toolkit.getDefaultToolkit();
+		public void beep() {
+			s_TOOLKIT.beep();
+		}
+	}
+
 	private static boolean debugMode = false;
-	private static final Toolkit s_TOOLKIT = Toolkit.getDefaultToolkit();
+	private static Beeper beeper = new Beeper() {public void beep() {}};
+	static {
+		try {
+			beeper = new BeeperImpl();
+		} catch (Throwable t) {
+		}
+	}
 
 	/** Log level for error output. */
 	public static final Level ERROR = Level.SEVERE;
@@ -247,7 +263,7 @@ public class Logging
 	{
 		if (isDebugMode())
 		{
-			s_TOOLKIT.beep();
+			beeper.beep();
 		}
 
 		final String msg = LanguageBundle.getString(aKey);
@@ -267,7 +283,7 @@ public class Logging
 	{
 		if (isDebugMode())
 		{
-			s_TOOLKIT.beep();
+			beeper.beep();
 		}
 
 		final String msg = LanguageBundle.getFormattedString(aKey, varargs);
@@ -299,7 +315,7 @@ public class Logging
 	{
 		if (isDebugMode())
 		{
-			s_TOOLKIT.beep();
+			beeper.beep();
 		}
 		
 		Logger l = getLogger();
@@ -372,7 +388,7 @@ public class Logging
 	{
 		if (isDebugMode())
 		{
-			s_TOOLKIT.beep();
+			beeper.beep();
 		}
 
 		Logger l = getLogger();
@@ -392,7 +408,7 @@ public class Logging
 	{
 		if (isDebugMode())
 		{
-			s_TOOLKIT.beep();
+			beeper.beep();
 		}
 
 		Logger l = getLogger();

@@ -29,6 +29,7 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Hashtable;
+
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -279,11 +280,12 @@ public class PortraitInfoPane extends JScrollPane implements CharacterInfoTab
 		{
 			File file = character.getPortraitRef().getReference();
 			setPortrait(file);
-			Rectangle cropRect = character.getThumbnailCropRef().getReference();
-			if (cropRect == null)
+			pcgen.util.Rectangle rect = character.getThumbnailCropRef().getReference();
+			if (rect == null)
 			{
-				cropRect = new Rectangle(0, 0, 100, 100);
+            	rect = new pcgen.util.Rectangle(0, 0, 100, 100);
 			}
+			Rectangle cropRect = new Rectangle(rect.x, rect.y, rect.width, rect.height);
 			portraitPane.setCropRectangle(cropRect);
 			tnPane.setCropRectangle(cropRect);
 
@@ -344,7 +346,7 @@ public class PortraitInfoPane extends JScrollPane implements CharacterInfoTab
 				setPortrait((File) obj);
 				Rectangle cropRect = new Rectangle(1, 1, 100, 100);
 				Utility.adjustRectToFitImage(image, cropRect);
-				character.setThumbnailCrop(cropRect);
+				character.setThumbnailCrop(new pcgen.util.Rectangle(cropRect.x, cropRect.y, cropRect.width, cropRect.height));
 			}
 			else if (obj instanceof Rectangle)
 			{
@@ -353,7 +355,7 @@ public class PortraitInfoPane extends JScrollPane implements CharacterInfoTab
 				Utility.adjustRectToFitImage(image, cropRect);
 				if (!rect.equals(cropRect))
 				{
-					character.setThumbnailCrop(cropRect);
+					character.setThumbnailCrop(new pcgen.util.Rectangle(cropRect.x, cropRect.y, cropRect.width, cropRect.height));
 				}
 				portraitPane.setCropRectangle(rect);
 				tnPane.setCropRectangle(rect);

@@ -20,7 +20,7 @@ package pcgen.cdom.facet.analysis;
 import java.util.EventListener;
 import java.util.EventObject;
 
-import javax.swing.event.EventListenerList;
+import pcgen.util.EventListenerList;
 
 import pcgen.base.formula.Formula;
 import pcgen.cdom.enumeration.CharID;

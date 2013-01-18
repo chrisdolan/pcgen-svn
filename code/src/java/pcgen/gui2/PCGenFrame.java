@@ -77,6 +77,7 @@ import org.lobobrowser.html.test.SimpleUserAgentContext;
 import pcgen.cdom.base.Constants;
 import pcgen.cdom.content.Sponsor;
 import pcgen.core.Globals;
+import pcgen.core.GlobalsForUI;
 import pcgen.core.facade.CampaignFacade;
 import pcgen.core.facade.CharacterFacade;
 import pcgen.core.facade.CharacterStubFacade;
@@ -155,7 +156,7 @@ public final class PCGenFrame extends JFrame implements UIDelegate
 		this.statusBar = new PCGenStatusBar(this);
 		this.filenameListener = new FilenameListener();
 		this.chooser = new JFileChooser();
-		Globals.setRootFrame(this);
+		GlobalsForUI.setRootFrame(this);
 		Observer messageObserver = new ShowMessageGuiObserver(this);
 		ShowMessageDelegate.getInstance().addObserver(messageObserver);
 		ChooserFactory.setDelegate(this);

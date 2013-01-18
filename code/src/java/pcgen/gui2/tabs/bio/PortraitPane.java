@@ -31,8 +31,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.image.BufferedImage;
+
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
+
 import pcgen.core.facade.CharacterFacade;
 import pcgen.gui2.tools.Utility;
 
@@ -171,7 +173,7 @@ class PortraitPane extends JComponent
 				y = Math.max(y, 0);
 				cropRect.setLocation(x, y);
 				Utility.adjustRectToFitImage(portrait, cropRect);
-				character.setThumbnailCrop(cropRect);
+				character.setThumbnailCrop(new pcgen.util.Rectangle(cropRect.x, cropRect.y, cropRect.width, cropRect.height));
 			}
 		}
 
@@ -235,7 +237,7 @@ class PortraitPane extends JComponent
 			y = Math.max(y, 0);
 			cropRect.setLocation(x, y);
 			Utility.adjustRectToFitImage(portrait, cropRect);
-			character.setThumbnailCrop(cropRect);
+			character.setThumbnailCrop(new pcgen.util.Rectangle(cropRect.x, cropRect.y, cropRect.width, cropRect.height));
 		}
 
 	}

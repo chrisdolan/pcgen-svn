@@ -25,7 +25,6 @@
  */
 package pcgen.io;
 
-import java.awt.Rectangle;
 import java.io.File;
 import java.math.BigDecimal;
 import java.net.URI;
@@ -135,6 +134,7 @@ import pcgen.system.FacadeFactory;
 import pcgen.system.LanguageBundle;
 import pcgen.system.PCGenSettings;
 import pcgen.util.Logging;
+import pcgen.util.Rectangle;
 import pcgen.util.enumeration.ProhibitedSpellType;
 
 /**

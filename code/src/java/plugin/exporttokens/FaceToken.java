@@ -34,6 +34,7 @@ import pcgen.core.display.CharacterDisplay;
 import pcgen.core.utils.CoreUtility;
 import pcgen.io.ExportHandler;
 import pcgen.io.exporttoken.AbstractExportToken;
+import pcgen.util.Point;
 
 /**
  * Deal with Tokens:
@@ -94,7 +95,7 @@ public class FaceToken extends AbstractExportToken
 	 */
 	public static String getFaceToken(CharacterDisplay display)
 	{
-		Point2D.Double face = display.getFace();
+		Point face = display.getFace();
 		String retString = "";
 		if (CoreUtility.doublesEqual(face.getY(), 0.0))
 		{
@@ -124,7 +125,7 @@ public class FaceToken extends AbstractExportToken
 	 */
 	public static String getShortToken(CharacterDisplay display)
 	{
-		Point2D.Double face = display.getFace();
+		Point face = display.getFace();
 		String retString = "";
 		if (CoreUtility.doublesEqual(face.getY(), 0.0))
 		{
@@ -154,7 +155,7 @@ public class FaceToken extends AbstractExportToken
 	 */
 	public static String getSquaresToken(CharacterDisplay display)
 	{
-		Point2D.Double face = display.getFace();
+		Point face = display.getFace();
 		String retString = "";
 		double squareSize = SettingsHandler.getGame().getSquareSize();
 		if (CoreUtility.doublesEqual(face.getY(), 0.0))

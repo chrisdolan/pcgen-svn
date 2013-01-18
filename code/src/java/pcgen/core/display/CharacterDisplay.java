@@ -17,8 +17,6 @@
  */
 package pcgen.core.display;
 
-import java.awt.Rectangle;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -718,7 +716,7 @@ public class CharacterDisplay
 		return handedFacet.getHanded(id);
 	}
 
-	public Point2D.Double getFace()
+	public pcgen.util.Point getFace()
 	{
 		return faceFacet.getFace(id);
 	}
@@ -753,10 +751,10 @@ public class CharacterDisplay
 		return getSafeStringFor(StringKey.PORTRAIT_PATH);
 	}
 
-	public Rectangle getPortraitThumbnailRect()
+	public pcgen.util.Rectangle getPortraitThumbnailRect()
 	{
-		Rectangle rect = portraitThumbnailRectFacet.get(id);
-		return rect == null ? null : (Rectangle) rect.clone();
+		pcgen.util.Rectangle rect = portraitThumbnailRectFacet.get(id);
+		return rect == null ? null : new pcgen.util.Rectangle(rect);
 	}
 
 	public String getName()

@@ -17,7 +17,7 @@
  */
 package pcgen.cdom.facet.fact;
 
-import java.awt.Rectangle;
+import pcgen.util.Rectangle;
 
 import pcgen.cdom.facet.base.AbstractItemFacet;
 import pcgen.cdom.testsupport.AbstractItemFacetTest;

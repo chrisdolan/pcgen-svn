@@ -25,7 +25,7 @@ import java.util.Map;
 
 import javax.swing.AbstractListModel;
 import javax.swing.ComboBoxModel;
-import javax.swing.event.EventListenerList;
+import pcgen.util.EventListenerList;
 
 import pcgen.system.LanguageBundle;
 import pcgen.util.Logging;

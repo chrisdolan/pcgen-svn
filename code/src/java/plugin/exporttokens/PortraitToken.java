@@ -26,7 +26,6 @@
 package plugin.exporttokens;
 
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
@@ -140,7 +139,7 @@ public class PortraitToken extends AbstractExportToken
 	 */
 	private BufferedImage generateThumb(CharacterDisplay display)
 	{
-		Rectangle cropRect = display.getPortraitThumbnailRect();
+		pcgen.util.Rectangle cropRect = display.getPortraitThumbnailRect();
 		BufferedImage portrait = null;
 		try
 		{
