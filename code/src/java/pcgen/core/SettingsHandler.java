@@ -45,6 +45,8 @@ import javax.swing.SwingConstants;
 
 import org.apache.commons.lang.SystemUtils;
 
+import pcgen.base.geom.Dimension;
+import pcgen.base.geom.Point;
 import pcgen.base.lang.StringUtil;
 import pcgen.cdom.base.Constants;
 import pcgen.cdom.enumeration.SourceFormat;
@@ -57,9 +59,7 @@ import pcgen.gui.utils.Utility;
 import pcgen.persistence.PersistenceLayerException;
 import pcgen.persistence.PersistenceManager;
 import pcgen.system.LanguageBundle;
-import pcgen.util.Dimension;
 import pcgen.util.Logging;
-import pcgen.util.Point;
 
 /**
  * This class contains all settings-related code moved from Globals.java

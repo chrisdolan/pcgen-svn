@@ -17,8 +17,8 @@
  */
 package pcgen.cdom.facet.fact;
 
-import pcgen.util.Rectangle;
 
+import pcgen.base.geom.Rectangle;
 import pcgen.cdom.facet.base.AbstractItemFacet;
 import pcgen.cdom.testsupport.AbstractItemFacetTest;
 

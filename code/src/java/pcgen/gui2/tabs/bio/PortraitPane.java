@@ -173,7 +173,7 @@ class PortraitPane extends JComponent
 				y = Math.max(y, 0);
 				cropRect.setLocation(x, y);
 				Utility.adjustRectToFitImage(portrait, cropRect);
-				character.setThumbnailCrop(new pcgen.util.Rectangle(cropRect.x, cropRect.y, cropRect.width, cropRect.height));
+				character.setThumbnailCrop(new pcgen.base.geom.Rectangle(cropRect.x, cropRect.y, cropRect.width, cropRect.height));
 			}
 		}
 
@@ -237,7 +237,7 @@ class PortraitPane extends JComponent
 			y = Math.max(y, 0);
 			cropRect.setLocation(x, y);
 			Utility.adjustRectToFitImage(portrait, cropRect);
-			character.setThumbnailCrop(new pcgen.util.Rectangle(cropRect.x, cropRect.y, cropRect.width, cropRect.height));
+			character.setThumbnailCrop(new pcgen.base.geom.Rectangle(cropRect.x, cropRect.y, cropRect.width, cropRect.height));
 		}
 
 	}

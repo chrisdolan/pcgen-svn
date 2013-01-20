@@ -19,6 +19,7 @@ package pcgen.cdom.facet.analysis;
 
 import java.math.BigDecimal;
 
+import pcgen.base.geom.Point;
 import pcgen.cdom.base.CDOMObject;
 import pcgen.cdom.enumeration.CharID;
 import pcgen.cdom.enumeration.ObjectKey;
@@ -26,7 +27,6 @@ import pcgen.cdom.facet.model.RaceFacet;
 import pcgen.cdom.facet.model.TemplateFacet;
 import pcgen.core.PCTemplate;
 import pcgen.core.Race;
-import pcgen.util.Point;
 
 /**
  * FaceFacet is a Facet that tracks the Face of a Player Character (in game
@@ -52,11 +52,11 @@ public class FaceFacet
 	 *            Face will be returned
 	 * @return The Face of the Player Character represented by the given CharID
 	 */
-	public pcgen.util.Point getFace(CharID id)
+	public pcgen.base.geom.Point getFace(CharID id)
 	{
 		final Race aRace = raceFacet.get(id);
 		// Default to 5' by 5'
-		Point face = new pcgen.util.Point(5, 0);
+		Point face = new pcgen.base.geom.Point(5, 0);
 		if (aRace != null)
 		{
 			Point rf = getFace(aRace);

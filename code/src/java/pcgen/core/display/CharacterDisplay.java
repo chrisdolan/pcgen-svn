@@ -716,7 +716,7 @@ public class CharacterDisplay
 		return handedFacet.getHanded(id);
 	}
 
-	public pcgen.util.Point getFace()
+	public pcgen.base.geom.Point getFace()
 	{
 		return faceFacet.getFace(id);
 	}
@@ -751,10 +751,10 @@ public class CharacterDisplay
 		return getSafeStringFor(StringKey.PORTRAIT_PATH);
 	}
 
-	public pcgen.util.Rectangle getPortraitThumbnailRect()
+	public pcgen.base.geom.Rectangle getPortraitThumbnailRect()
 	{
-		pcgen.util.Rectangle rect = portraitThumbnailRectFacet.get(id);
-		return rect == null ? null : new pcgen.util.Rectangle(rect);
+		pcgen.base.geom.Rectangle rect = portraitThumbnailRectFacet.get(id);
+		return rect == null ? null : new pcgen.base.geom.Rectangle(rect);
 	}
 
 	public String getName()

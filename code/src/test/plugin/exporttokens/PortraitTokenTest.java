@@ -28,9 +28,9 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 import pcgen.AbstractCharacterTestCase;
+import pcgen.base.geom.Rectangle;
 import pcgen.cdom.base.Constants;
 import pcgen.core.PlayerCharacter;
-import pcgen.util.Rectangle;
 
 /**
  * The Class <code>PortraitTokenTest</code> checks the function of PortraitToken.

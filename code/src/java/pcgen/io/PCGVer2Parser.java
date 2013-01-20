@@ -39,6 +39,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import pcgen.base.geom.Rectangle;
 import pcgen.base.util.FixedStringList;
 import pcgen.base.util.HashMapToList;
 import pcgen.cdom.base.AssociatedPrereqObject;
@@ -134,7 +135,6 @@ import pcgen.system.FacadeFactory;
 import pcgen.system.LanguageBundle;
 import pcgen.system.PCGenSettings;
 import pcgen.util.Logging;
-import pcgen.util.Rectangle;
 import pcgen.util.enumeration.ProhibitedSpellType;
 
 /**

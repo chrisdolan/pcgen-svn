@@ -280,10 +280,10 @@ public class PortraitInfoPane extends JScrollPane implements CharacterInfoTab
 		{
 			File file = character.getPortraitRef().getReference();
 			setPortrait(file);
-			pcgen.util.Rectangle rect = character.getThumbnailCropRef().getReference();
+			pcgen.base.geom.Rectangle rect = character.getThumbnailCropRef().getReference();
 			if (rect == null)
 			{
-            	rect = new pcgen.util.Rectangle(0, 0, 100, 100);
+            	rect = new pcgen.base.geom.Rectangle(0, 0, 100, 100);
 			}
 			Rectangle cropRect = new Rectangle(rect.x, rect.y, rect.width, rect.height);
 			portraitPane.setCropRectangle(cropRect);
@@ -346,7 +346,7 @@ public class PortraitInfoPane extends JScrollPane implements CharacterInfoTab
 				setPortrait((File) obj);
 				Rectangle cropRect = new Rectangle(1, 1, 100, 100);
 				Utility.adjustRectToFitImage(image, cropRect);
-				character.setThumbnailCrop(new pcgen.util.Rectangle(cropRect.x, cropRect.y, cropRect.width, cropRect.height));
+				character.setThumbnailCrop(new pcgen.base.geom.Rectangle(cropRect.x, cropRect.y, cropRect.width, cropRect.height));
 			}
 			else if (obj instanceof Rectangle)
 			{
@@ -355,7 +355,7 @@ public class PortraitInfoPane extends JScrollPane implements CharacterInfoTab
 				Utility.adjustRectToFitImage(image, cropRect);
 				if (!rect.equals(cropRect))
 				{
-					character.setThumbnailCrop(new pcgen.util.Rectangle(cropRect.x, cropRect.y, cropRect.width, cropRect.height));
+					character.setThumbnailCrop(new pcgen.base.geom.Rectangle(cropRect.x, cropRect.y, cropRect.width, cropRect.height));
 				}
 				portraitPane.setCropRectangle(rect);
 				tnPane.setCropRectangle(rect);

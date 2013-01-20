@@ -25,6 +25,7 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.util.List;
 
+import pcgen.base.geom.Rectangle;
 import pcgen.cdom.enumeration.BiographyField;
 import pcgen.cdom.enumeration.Nature;
 import pcgen.cdom.enumeration.SkillCost;
@@ -34,7 +35,6 @@ import pcgen.core.facade.event.ChangeListener;
 import pcgen.core.facade.util.DefaultListFacade;
 import pcgen.core.facade.util.ListFacade;
 import pcgen.io.ExportHandler;
-import pcgen.util.Rectangle;
 
 /**
  * The CharacterFacade interface provides a key role in separation

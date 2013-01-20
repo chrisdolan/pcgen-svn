@@ -28,13 +28,13 @@ package plugin.exporttokens;
 import java.awt.geom.Point2D;
 import java.text.DecimalFormat;
 
+import pcgen.base.geom.Point;
 import pcgen.core.Globals;
 import pcgen.core.SettingsHandler;
 import pcgen.core.display.CharacterDisplay;
 import pcgen.core.utils.CoreUtility;
 import pcgen.io.ExportHandler;
 import pcgen.io.exporttoken.AbstractExportToken;
-import pcgen.util.Point;
 
 /**
  * Deal with Tokens:

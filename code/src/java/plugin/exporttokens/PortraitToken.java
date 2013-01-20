@@ -139,7 +139,7 @@ public class PortraitToken extends AbstractExportToken
 	 */
 	private BufferedImage generateThumb(CharacterDisplay display)
 	{
-		pcgen.util.Rectangle cropRect = display.getPortraitThumbnailRect();
+		pcgen.base.geom.Rectangle cropRect = display.getPortraitThumbnailRect();
 		BufferedImage portrait = null;
 		try
 		{

@@ -78,8 +78,8 @@ public final class EQFrame extends JDialog
 
 		pack();
 
-		final pcgen.util.Dimension customizerDim = SettingsHandler.getCustomizerDimension();
-		final pcgen.util.Point customizerLoc = SettingsHandler.getCustomizerLeftUpperCorner();
+		final pcgen.base.geom.Dimension customizerDim = SettingsHandler.getCustomizerDimension();
+		final pcgen.base.geom.Point customizerLoc = SettingsHandler.getCustomizerLeftUpperCorner();
 		int x = -11;
 		int y = -11;
 
@@ -164,9 +164,9 @@ public final class EQFrame extends JDialog
 			this.newEquip = newEquip;
 			this.purchase = purchase;
 			Point screenLoc = getLocationOnScreen();
-			SettingsHandler.setCustomizerLeftUpperCorner(new pcgen.util.Point(screenLoc.x, screenLoc.y));
+			SettingsHandler.setCustomizerLeftUpperCorner(new pcgen.base.geom.Point(screenLoc.x, screenLoc.y));
 			Dimension size = getSize();
-			SettingsHandler.setCustomizerDimension(new pcgen.util.Dimension(size.width, size.height));
+			SettingsHandler.setCustomizerDimension(new pcgen.base.geom.Dimension(size.width, size.height));
 			//SettingsHandler.writeOptionsProperties(aPC);
 		}
 

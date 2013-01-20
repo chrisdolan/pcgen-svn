@@ -1961,7 +1961,7 @@ public class PlayerCharacter  implements Cloneable, VariableContainer, Associati
 	 * Set a new outline for the portrait thumbnail.
 	 * @param rect The thumbnail outline.
 	 */
-	public void setPortraitThumbnailRect(pcgen.util.Rectangle rect)
+	public void setPortraitThumbnailRect(pcgen.base.geom.Rectangle rect)
 	{
 		portraitThumbnailRectFacet.set(id, rect);
 	}

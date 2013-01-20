@@ -37,6 +37,7 @@ import java.util.TreeSet;
 
 import org.apache.commons.lang.StringUtils;
 
+import pcgen.base.geom.Rectangle;
 import pcgen.base.lang.StringUtil;
 import pcgen.base.util.FixedStringList;
 import pcgen.cdom.base.CDOMList;
@@ -98,7 +99,6 @@ import pcgen.persistence.PersistenceManager;
 import pcgen.system.PCGenPropBundle;
 import pcgen.util.FileHelper;
 import pcgen.util.Logging;
-import pcgen.util.Rectangle;
 import pcgen.util.StringPClassUtil;
 
 /**

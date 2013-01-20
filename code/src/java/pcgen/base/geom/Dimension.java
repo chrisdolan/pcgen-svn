@@ -1,6 +1,5 @@
 /*
- * PortraitThumbnailRectFacet.java
- * Copyright (c) James Dempsey 2011.
+ * Copyright (c) 2013 Chris Dolan <chris@chrisdolan.net>
  * 
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,22 +15,25 @@
  * along with this library; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
  */
-package pcgen.cdom.facet.fact;
-
-import pcgen.base.geom.Rectangle;
-import pcgen.cdom.facet.base.AbstractItemFacet;
+package pcgen.base.geom;
 
 /**
- * PortraitThumbnailRectFacet is a Facet that tracks the thumbnail rectangle for 
- * the character's portrait.
- * 
- * Last Editor: $Author$ <br/>
- * Last Edited: $Date$
- * 
- * @author James Dempsey <jdempsey@users.sourceforge.net>
- * @version $Revision$
+ * This class helps us remove dependency on AWT's Dimension class
  */
-public class PortraitThumbnailRectFacet extends AbstractItemFacet<Rectangle>
-{
+public class Dimension {
+	public final int width;
+	public final int height;
 
+	public Dimension(int width, int height) {
+		this.width = width;
+		this.height = height;
+	}
+
+	public double getWidth() {
+		return width;
+	}
+
+	public double getHeight() {
+		return height;
+	}
 }
