@@ -95,7 +95,7 @@ public class FaceFacet
 		{
 			return null;
 		}
-		return new Point(width.doubleValue(), height.doubleValue());
+		return new Point(width.intValue(), height.intValue());
 	}
 
 	public void setTemplateFacet(TemplateFacet templateFacet)

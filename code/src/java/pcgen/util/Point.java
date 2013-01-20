@@ -4,10 +4,10 @@ package pcgen.util;
  * This class helps us remove dependency on AWT's Point2D
  */
 public class Point {
-	private final double x;
-	private final double y;
+	public final int x;
+	public final int y;
 
-	public Point(double x, double y) {
+	public Point(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}

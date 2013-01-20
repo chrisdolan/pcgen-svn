@@ -25,10 +25,7 @@
  */
 package pcgen.core;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Frame;
-import java.awt.Point;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -60,7 +57,9 @@ import pcgen.gui.utils.Utility;
 import pcgen.persistence.PersistenceLayerException;
 import pcgen.persistence.PersistenceManager;
 import pcgen.system.LanguageBundle;
+import pcgen.util.Dimension;
 import pcgen.util.Logging;
+import pcgen.util.Point;
 
 /**
  * This class contains all settings-related code moved from Globals.java
@@ -1160,6 +1159,13 @@ public final class SettingsHandler
 		return options;
 	}
 
+	private static final int color(int r, int g, int b) {
+		int a = 255;
+        return  ((a & 0xFF) << 24) |
+                ((r & 0xFF) << 16) |
+                ((g & 0xFF) << 8)  |
+                ((b & 0xFF) << 0);
+	}
 	public static Dimension getOptionsFromProperties(final PlayerCharacter aPC)
 	{
 		Dimension d = new Dimension(0, 0);
@@ -1269,10 +1275,10 @@ public final class SettingsHandler
 		setEquipTab_SelectedListMode(getPCGenOption("EquipTab.selectedListMode", GuiConstants.INFOEQUIPPING_VIEW_NAME)); //$NON-NLS-1$
 //		setExcSkillCost(getPCGenOption("excSkillCost", 0)); //$NON-NLS-1$
 		setExpertGUI(getPCGenOption("expertGUI", false)); //$NON-NLS-1$
-		setFeatAutoColor(getPCGenOption("featAutoColor", Color.yellow.darker().getRGB())); //$NON-NLS-1$
+		setFeatAutoColor(getPCGenOption("featAutoColor", color(178,178,0))); //$NON-NLS-1$ //Color.yellow.darker().getRGB()
 		setFeatTab_AvailableListMode(getPCGenOption("FeatTab.availableListMode", GuiConstants.INFOFEATS_VIEW_PREREQTREE)); //$NON-NLS-1$
 		setFeatTab_SelectedListMode(getPCGenOption("FeatTab.selectedListMode", GuiConstants.INFOFEATS_VIEW_NAMEONLY)); //$NON-NLS-1$
-		setFeatVirtualColor(getPCGenOption("featVirtualColor", Color.magenta.getRGB())); //$NON-NLS-1$
+		setFeatVirtualColor(getPCGenOption("featVirtualColor", color(255,0,255))); //$NON-NLS-1$ // Color.magenta.getRGB()
 		setGearTab_AllowDebt(getPCGenOption("GearTab.allowDebt", false)); //$NON-NLS-1$
 		setGearTab_AutoResize(getPCGenOption("GearTab.autoResize", false)); //$NON-NLS-1$
 		setGearTab_AvailableListMode(getPCGenOption("GearTab.availableListMode", //$NON-NLS-1$
@@ -1324,8 +1330,8 @@ public final class SettingsHandler
 						Globals.getDefaultPcgPath()))));
 		setPostExportCommandStandard(getPCGenOption("postExportCommandStandard", "")); //$NON-NLS-1$ //$NON-NLS-2$
 		setPostExportCommandPDF(getPCGenOption("postExportCommandPDF", "")); //$NON-NLS-1$ //$NON-NLS-2$
-		setPrereqFailColor(getPCGenOption("prereqFailColor", Color.red.getRGB())); //$NON-NLS-1$
-		setPrereqQualifyColor(getPCGenOption("prereqQualifyColor", Color.black.getRGB())); //$NON-NLS-1$
+		setPrereqFailColor(getPCGenOption("prereqFailColor", color(255,0,0))); //$NON-NLS-1$ // Color.red.getRGB()
+		setPrereqQualifyColor(getPCGenOption("prereqQualifyColor", color(0,0,0))); //$NON-NLS-1$ // Color.black.getRGB()
 		setPreviewTabShown(getPCGenOption("previewTabShown", true)); //$NON-NLS-1$
 		setQuickLaunchSources(getPCGenOption("quickLaunchSources", "")); //$NON-NLS-1$ //$NON-NLS-2$
 		setRaceTab_ListMode(getPCGenOption("RaceTab.ListMode", GuiConstants.INFORACE_VIEW_NAME)); //$NON-NLS-1$
@@ -1365,10 +1371,10 @@ public final class SettingsHandler
 		setSpellMarketPriceAdjusted(getPCGenOption("spellMarketPriceAdjusted", false)); //$NON-NLS-1$
 		setSpellsTab_AvailableListMode(getPCGenOption("SpellsTab.availableListMode", GuiConstants.INFOSPELLS_VIEW_CLASS)); //$NON-NLS-1$
 		setSpellsTab_SelectedListMode(getPCGenOption("SpellsTab.selectedListMode", GuiConstants.INFOSPELLS_VIEW_CLASS)); //$NON-NLS-1$
-		setSourceStatusReleaseColor(getPCGenOption("sourceStatusReleaseColor", Color.black.getRGB())); //$NON-NLS-1$
-		setSourceStatusAlphaColor(getPCGenOption("sourceStatusAlphaColor", Color.red.getRGB())); //$NON-NLS-1$
-		setSourceStatusBetaColor(getPCGenOption("sourceStatusBetaColor", new Color(128, 0, 0).getRGB())); //$NON-NLS-1$
-		setSourceStatusTestColor(getPCGenOption("sourceStatusTestColor", Color.magenta.getRGB())); //$NON-NLS-1$
+		setSourceStatusReleaseColor(getPCGenOption("sourceStatusReleaseColor", color(0,0,0))); //$NON-NLS-1$ // Color.black.getRGB()
+		setSourceStatusAlphaColor(getPCGenOption("sourceStatusAlphaColor", color(255,0,0))); //$NON-NLS-1$ // Color.red.getRGB()
+		setSourceStatusBetaColor(getPCGenOption("sourceStatusBetaColor", color(128, 0, 0))); //$NON-NLS-1$
+		setSourceStatusTestColor(getPCGenOption("sourceStatusTestColor", color(255,0,255))); //$NON-NLS-1$ // Color.magenta.getRGB()
 		setSummaryTabShown(getPCGenOption("summaryTabShown", true)); //$NON-NLS-1$
 		setTabPlacement(getOptionTabPlacement("tabPlacement", SwingConstants.BOTTOM)); //$NON-NLS-1$
 		setTemplateSelTab_ListMode(getPCGenOption("TemplateTab.selectedListMode", GuiConstants.INFOTEMPLATE_VIEW_NAME)); //$NON-NLS-1$
