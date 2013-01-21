@@ -25,7 +25,6 @@
  */
 package plugin.exporttokens;
 
-import java.awt.geom.Point2D;
 import java.text.DecimalFormat;
 
 import pcgen.base.geom.Point;

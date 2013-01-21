@@ -43,7 +43,7 @@ public class FaceFacet
 
 	/**
 	 * Returns the Face of the Player Character represented by the given CharID.
-	 * The Face is a Point2D, where the X value of the Point represents the
+	 * The Face is a Point, where the X value of the Point represents the
 	 * front/rear facing size and the Y value of the Point represents the
 	 * left/right side facing size.
 	 * 
@@ -84,7 +84,7 @@ public class FaceFacet
 	 * 
 	 * @param cdo
 	 *            The CDOMObject in which the Face information is stored
-	 * @return The Point2D indicating the Face as defined by the given
+	 * @return The Point indicating the Face as defined by the given
 	 *         CDOMObject.
 	 */
 	private Point getFace(CDOMObject cdo)

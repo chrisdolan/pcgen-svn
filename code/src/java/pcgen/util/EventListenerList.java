@@ -29,6 +29,7 @@ public class EventListenerList {
 	private final List<Object> listeners = new ArrayList<Object>();
 
 	public <T extends EventListener> void add(Class<T> clazz, T listener) {
+		listeners.add(clazz);
 		listeners.add(listener);
 	}
 
