@@ -142,7 +142,7 @@ public final class Globals
 	private static List<Campaign> campaignList          = new ArrayList<Campaign>(85);
 
 	// end of filter creation sets
-	private static final StringBuilder section15 = new StringBuilder(30000);
+	private static final StringBuilder section15 = Runtime.getRuntime().maxMemory() < 100000000 ? null : new StringBuilder(30000);
 	private static final String spellPoints = "0";
 
 	/** whether or not the GUI is used (false for command line) */
