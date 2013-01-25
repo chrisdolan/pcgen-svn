@@ -53,7 +53,7 @@ public class SimpleLoader<T extends Loadable> extends LstLineFileLoader
 
 		while (colToken.hasMoreTokens())
 		{
-			LstUtils.processToken(context, loadable, sourceURI, colToken.nextToken().trim());
+			LstUtils.processToken(context, loadable, sourceURI, colToken.nextToken());
 		}
 	}
 
@@ -65,7 +65,7 @@ public class SimpleLoader<T extends Loadable> extends LstLineFileLoader
 		{
 			return null;
 		}
-		T loadable = context.ref.constructCDOMObject(loadClass, name);
+		T loadable = context.ref.constructCDOMObject(loadClass, name.intern());
 		loadable.setSourceURI(sourceURI);
 		return loadable;
 	}
