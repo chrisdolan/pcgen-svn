@@ -261,7 +261,7 @@ public class CDOMTokenLoader<T extends CDOMObject> implements CDOMLoader<T>
 						+ " " + sourceName + " but it was never built");
 				continue;
 			}
-			T copy = context.cloneConstructedCDOMObject(sourceObj, copyName);
+			T copy = context.cloneConstructedCDOMObject(sourceObj, copyName.intern());
 			try
 			{
 				parseLine(context, copy, restOfLine, me.source.getURI());

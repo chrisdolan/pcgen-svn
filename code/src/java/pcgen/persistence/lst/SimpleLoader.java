@@ -45,7 +45,7 @@ public class SimpleLoader<T extends Loadable> extends LstLineFileLoader
 		StringTokenizer colToken = new StringTokenizer(lstLine,
 				SystemLoader.TAB_DELIM);
 		String firstToken = colToken.nextToken().trim();
-		Loadable loadable = getLoadable(context, firstToken, sourceURI);
+		Loadable loadable = getLoadable(context, firstToken.intern(), sourceURI);
 		if (loadable == null)
 		{
 			return;
