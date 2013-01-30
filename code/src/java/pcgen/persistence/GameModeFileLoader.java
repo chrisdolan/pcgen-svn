@@ -21,7 +21,7 @@
 package pcgen.persistence;
 
 import java.io.File;
-import java.io.FilenameFilter;
+import java.io.FileFilter;
 import java.net.URI;
 import java.util.Collection;
 import pcgen.base.lang.UnreachableError;
@@ -73,18 +73,32 @@ import pcgen.util.enumeration.Tab;
  */
 public class GameModeFileLoader extends PCGenTask
 {
+	private final GameModeFilter gameModeFilter;
 
-	private static final FilenameFilter gameModeFileFilter =
-			new FilenameFilter()
+	public interface GameModeFilter
+	{
+		boolean acceptDir(File gameModeDir);
+		boolean acceptMode(GameMode gameMode);
+	}
+
+	public GameModeFileLoader()
+	{
+		this.gameModeFilter = null;
+	}
+	public GameModeFileLoader(GameModeFilter gameModeFilter)
+	{
+		this.gameModeFilter = gameModeFilter;
+	}
+
+	private final FileFilter gameModeFileFilter =
+			new FileFilter()
 			{
 
         @Override
-				public boolean accept(File aFile, String aString)
+				public boolean accept(File d)
 				{
 					try
 					{
-						final File d = new File(aFile, aString);
-
 						if (d.isDirectory())
 						{
 							// the directory must contain
@@ -92,7 +106,8 @@ public class GameModeFileLoader extends PCGenTask
 							// "statsandchecks.lst" file to be
 							// a complete gameMode
 							return new File(d, "statsandchecks.lst").exists() &&
-									new File(d, "miscinfo.lst").exists();
+									new File(d, "miscinfo.lst").exists() &&
+									(gameModeFilter == null || gameModeFilter.acceptDir(d));
 						}
 					}
 					catch (SecurityException e)
@@ -114,7 +129,7 @@ public class GameModeFileLoader extends PCGenTask
 	@Override
 	public void execute()
 	{
-		String[] gameFiles = getGameFilesList();
+		File[] gameFiles = getGameFilesList();
 		if ((gameFiles != null) && (gameFiles.length > 0))
 		{
 			setMaximum(gameFiles.length + 1);
@@ -128,13 +143,12 @@ public class GameModeFileLoader extends PCGenTask
 	 * that contain a file named statsandchecks.lst and miscinfo.lst
 	 * @return game files list
 	 */
-	private static String[] getGameFilesList()
+	private File[] getGameFilesList()
 	{
-		final String aDirectory =
-				ConfigurationSettings.getSystemsDir() + File.separator + "gameModes" +
-				File.separator;
+		final File aDirectory =
+				new File(ConfigurationSettings.getSystemsDir(), "gameModes");
 
-		return new File(aDirectory).list(gameModeFileFilter);
+		return aDirectory.listFiles(gameModeFileFilter);
 	}
 
 	private static UnitSet DEFAULT_UNIT_SET;
@@ -171,65 +185,79 @@ public class GameModeFileLoader extends PCGenTask
 		}
 	}
 
-	private void loadGameModes(String[] gameFiles)
+	private void loadGameModes(File[] gameFiles)
 	{
 		int progress = 0;
 		
 		SystemCollections.clearGameModeList();
-		File gameModeDir = new File(ConfigurationSettings.getSystemsDir(), "gameModes");
-		for (String gameFile : gameFiles)
+		for (File gameFile : gameFiles)
 		{
-			File specGameModeDir = new File(gameModeDir, gameFile);
-			File miscInfoFile = new File(specGameModeDir, "miscinfo.lst");
-			final GameMode gm = loadGameModeMiscInfo(gameFile, miscInfoFile.toURI());
-			if (gm != null)
+			loadOneGameMode(gameFile);
+
+			progress++;
+			setProgress(progress);
+		}
+
+		SystemCollections.sortGameModeList();
+	}
+
+	protected void loadOneGameMode(File specGameModeDir) throws UnreachableError {
+		String gameFile = specGameModeDir.getName();
+		File miscInfoFile = new File(specGameModeDir, "miscinfo.lst");
+		final GameMode gm = loadGameModeMiscInfo(gameFile, miscInfoFile.toURI());
+		if (gm != null)
+		{
+			if (gameModeFilter != null && !gameModeFilter.acceptMode(gm))
+				return;
+
+			// This has to happen early, unfortunately, or we get a null pointer from equipIcons.lst
+			SystemCollections.addToGameModeList(gm);
+
+			String gmName = gm.getName();
+			//SettingsHandler.setGame(gmName);
+			LoadContext context = gm.getModeContext();
+			loadGameModeInfoFile(gm, new File(specGameModeDir, "level.lst").toURI(), "level");
+			loadGameModeInfoFile(gm, new File(specGameModeDir, "rules.lst").toURI(), "rules");
+
+			// Load equipmentslot.lst
+			loadGameModeLstFile(context, eqSlotLoader, gmName, gameFile,
+								"equipmentslots.lst");
+
+			// Load paperInfo.lst
+			loadGameModeLstFile(context, paperLoader, gmName, gameFile, "paperInfo.lst");
+			Globals.selectPaper(SettingsHandler.getPCGenOption("paperName", "A4"));
+
+			// Load bio files
+			loadGameModeLstFile(context, traitLoader, gmName, gameFile, "bio" + File.separator +
+					"traits.lst");
+			loadGameModeLstFile(context, locationLoader, gmName, gameFile, "bio" +
+					File.separator + "locations.lst");
+
+			// Load load.lst and check for completeness
+			loadGameModeLstFile(context, loadInfoLoader, gmName, gameFile, "load.lst");
+
+			// Load sizeAdjustment.lst
+			loadGameModeLstFile(context, sizeLoader, gmName, gameFile,
+								"sizeAdjustment.lst");
+
+			// Load statsandchecks.lst
+			loadGameModeLstFile(context, statCheckLoader, gmName, gameFile,
+								"statsandchecks.lst");
+
+			// Load equipIcons.lst
+			loadGameModeLstFile(context, equipIconLoader, gmName, gameFile,
+				"equipIcons.lst");
+
+			
+			// Load pointbuymethods.lst
+			loadPointBuyFile(context, gameFile, gmName);
+			for (PointBuyCost pbc : context.ref.getConstructedCDOMObjects(PointBuyCost.class))
 			{
-				String gmName = gm.getName();
-				//SettingsHandler.setGame(gmName);
-				LoadContext context = gm.getModeContext();
-				loadGameModeInfoFile(gm, new File(specGameModeDir, "level.lst").toURI(), "level");
-				loadGameModeInfoFile(gm, new File(specGameModeDir, "rules.lst").toURI(), "rules");
-
-				// Load equipmentslot.lst
-				loadGameModeLstFile(context, eqSlotLoader, gmName, gameFile,
-									"equipmentslots.lst");
-
-				// Load paperInfo.lst
-				loadGameModeLstFile(context, paperLoader, gmName, gameFile, "paperInfo.lst");
-				Globals.selectPaper(SettingsHandler.getPCGenOption("paperName", "A4"));
-
-				// Load bio files
-				loadGameModeLstFile(context, traitLoader, gmName, gameFile, "bio" + File.separator +
-						"traits.lst");
-				loadGameModeLstFile(context, locationLoader, gmName, gameFile, "bio" +
-						File.separator + "locations.lst");
-
-				// Load load.lst and check for completeness
-				loadGameModeLstFile(context, loadInfoLoader, gmName, gameFile, "load.lst");
-
-				// Load sizeAdjustment.lst
-				loadGameModeLstFile(context, sizeLoader, gmName, gameFile,
-									"sizeAdjustment.lst");
-
-				// Load statsandchecks.lst
-				loadGameModeLstFile(context, statCheckLoader, gmName, gameFile,
-									"statsandchecks.lst");
-
-				// Load equipIcons.lst
-				loadGameModeLstFile(context, equipIconLoader, gmName, gameFile,
-					"equipIcons.lst");
-
-				
-				// Load pointbuymethods.lst
-				loadPointBuyFile(context, gameFile, gmName);
-				for (PointBuyCost pbc : context.ref.getConstructedCDOMObjects(PointBuyCost.class))
-				{
-					gm.addPointBuyStatCost(pbc);
-				}
-
-				loadGameModeLstFile(context, bioLoader, gmName, gameFile, "bio" + File.separator +
-						"biosettings.lst");
+				gm.addPointBuyStatCost(pbc);
 			}
+
+			loadGameModeLstFile(context, bioLoader, gmName, gameFile, "bio" + File.separator +
+					"biosettings.lst");
 			try
 			{
 				addDefaultWieldCategories(gm.getModeContext());
@@ -240,12 +268,7 @@ public class GameModeFileLoader extends PCGenTask
 				Logging.errorPrint("  " + ple.getMessage(), ple);
 				throw new UnreachableError();
 			}
-
-			progress++;
-			setProgress(progress);
 		}
-
-		SystemCollections.sortGameModeList();
 	}
 
 	/**
@@ -397,7 +420,6 @@ public class GameModeFileLoader extends PCGenTask
 			if (gameMode == null)
 			{
 				gameMode = new GameMode(aName);
-				SystemCollections.addToGameModeList(gameMode);
 				gameMode.getModeContext().ref.importObject(AbilityCategory.FEAT);
 			}
 

@@ -101,11 +101,17 @@ public class CampaignLoader extends LstLineFileLoader
 	}
 
 	/**
+	 * This exists just for backward compatibility in case someone overrode the method (unlikely)
+	 */
+	protected void finishCampaign() {
+		finishCampaign(campaign);
+	}
+	/**
 	 * This method finishes the campaign being loaded by saving its section 15
 	 * information as well as adding it to Globals, if it has not already been
 	 * loaded.
 	 */
-	protected void finishCampaign()
+	protected void finishCampaign(Campaign campaign)
 	{
 		if (Globals.getCampaignByURI(campaign.getSourceURI(), false) == null)
 		{
