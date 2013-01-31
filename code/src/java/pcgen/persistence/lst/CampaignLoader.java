@@ -90,7 +90,7 @@ public class CampaignLoader extends LstLineFileLoader
 
 		super.loadLstFile(campaign.getCampaignContext(), fileName);
 
-		finishCampaign();
+		finishCampaign(campaign);
 	}
 
 	@Override
@@ -102,21 +102,25 @@ public class CampaignLoader extends LstLineFileLoader
 
 	/**
 	 * This exists just for backward compatibility in case someone overrode the method (unlikely)
+	 * @deprecated use {@link #finishCampaign(Campaign)} instead
 	 */
-	protected void finishCampaign() {
+	@Deprecated
+	protected void finishCampaign()
+	{
 		finishCampaign(campaign);
 	}
 	/**
 	 * This method finishes the campaign being loaded by saving its section 15
 	 * information as well as adding it to Globals, if it has not already been
 	 * loaded.
+	 * @param aCampaign a non-null campaign instance to be validated and added to the registry
 	 */
-	protected void finishCampaign(Campaign campaign)
+	protected void finishCampaign(Campaign aCampaign)
 	{
-		if (Globals.getCampaignByURI(campaign.getSourceURI(), false) == null)
+		if (Globals.getCampaignByURI(aCampaign.getSourceURI(), false) == null)
 		{
-			validatePrereqs(campaign.getPrerequisiteList());
-			List<String> copyright = campaign.getListFor(ListKey.SECTION_15);
+			validatePrereqs(aCampaign.getPrerequisiteList());
+			List<String> copyright = aCampaign.getListFor(ListKey.SECTION_15);
 			if (copyright != null)
 			{
 				StringBuilder sec15 = Globals.getSection15();
@@ -134,7 +138,7 @@ public class CampaignLoader extends LstLineFileLoader
 				}
 			}
 
-			Globals.addCampaign(campaign);
+			Globals.addCampaign(aCampaign);
 		}
 	}
 

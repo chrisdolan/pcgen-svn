@@ -26,10 +26,10 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
 import pcgen.core.Campaign;
 import pcgen.core.Globals;
+import pcgen.core.SystemCollections;
 import pcgen.persistence.lst.CampaignLoader;
 import pcgen.system.ConfigurationSettings;
 import pcgen.system.LanguageBundle;
@@ -42,11 +42,6 @@ import pcgen.util.Logging;
  */
 public class CampaignFileLoader extends PCGenTask
 {
-	public interface CampaignFilter
-	{
-		boolean acceptPccFile(File campaignFile);
-		boolean acceptCampaign(Campaign campaign);
-	}
 
 	private File alternateSourceFolder = null;
 	
@@ -78,18 +73,37 @@ public class CampaignFileLoader extends PCGenTask
 	private boolean isLoading = false;
 	private CampaignLoader campaignLoader = new CampaignLoader()
 	{
+		/**
+		 * Override implementation that invokes a filter, if present, during the loading phase.
+		 * The filter is not consulted during the initialization phase because any campaign
+		 * loaded at that time is a missing prerequisite for another campaign alreday loaded
+		 * and thus is necessary.
+		 */
 		protected void finishCampaign(Campaign campaign)
 		{
 			if (!isLoading || null == campaignFilter || campaignFilter.acceptCampaign(campaign))
+			{
 				super.finishCampaign(campaign);
+			}
 		}
 	};
 	private final CampaignFilter campaignFilter;
 
-	public CampaignFileLoader() {
+	/**
+	 * Standard constructor, loads all campaigns that are available.
+	 */
+	public CampaignFileLoader()
+	{
 		this.campaignFilter = null;
 	}
-	public CampaignFileLoader(CampaignFilter campaignFilter) {
+	/**
+	 * Specialized loader that only reads a subset of the campaigns, presumably for
+	 * performance-critical or memory-limited applications.
+	 * @param campaignFilter a non-null filter that will be invoked for each
+	 *     discovered .pcc campaign.
+	 */
+	public CampaignFileLoader(CampaignFilter campaignFilter)
+	{
 		this.campaignFilter = campaignFilter;
 	}
 
@@ -140,6 +154,8 @@ public class CampaignFileLoader extends PCGenTask
 
 	private void loadCampaigns()
 	{
+		// This flag is for our CampaignLoader.finishCampaign implementation, which needs to
+		// distinguish between essential campaigns (i.e. prereqs) and optional campaigns
 		isLoading = true;
 		int progress = 0;
 		while (!campaignFiles.isEmpty())
@@ -193,4 +209,31 @@ public class CampaignFileLoader extends PCGenTask
 		this.alternateSourceFolder = alternateSourceFolder;
 	}
 
+	/**
+	 * Allows a user to only load a subset of the available campaigns to save memory and time.
+	 * If this filter is implemented, each campaign must pass all of the boolean tests to be loaded 
+	 */
+	public interface CampaignFilter
+	{
+		/**
+		 * This method will be called first during the .pcc file discovery phase.
+		 * @param campaignFile a non-null .pcc file instance
+		 * @return false if this file should not be loaded or true if it should be loaded
+		 *     (but you can subsequently reject it via {@link #acceptCampaign(Campaign)})
+		 */
+		boolean acceptPccFile(File campaignFile);
+
+		/**
+		 * Invoked after the campaign has been partially parsed (the metadata, but not the
+		 * associated rules and prereqs). This method can be used, for example, to filter on
+		 * campaign name or game mode. At the time this method is invoked, the campaign has
+		 * not yet been added to the global registry.
+		 *  
+		 * @param campaign a non-null {@link Campaign} instance
+		 * @return false if the campaign should not be parsed further and should
+		 *     not be added to the {@link SystemCollections} registry, or true if it
+		 *     should be.
+		 */
+		boolean acceptCampaign(Campaign campaign);
+	}
 }

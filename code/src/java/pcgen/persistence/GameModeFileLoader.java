@@ -75,21 +75,6 @@ public class GameModeFileLoader extends PCGenTask
 {
 	private final GameModeFilter gameModeFilter;
 
-	public interface GameModeFilter
-	{
-		boolean acceptDir(File gameModeDir);
-		boolean acceptMode(GameMode gameMode);
-	}
-
-	public GameModeFileLoader()
-	{
-		this.gameModeFilter = null;
-	}
-	public GameModeFileLoader(GameModeFilter gameModeFilter)
-	{
-		this.gameModeFilter = gameModeFilter;
-	}
-
 	private final FileFilter gameModeFileFilter =
 			new FileFilter()
 			{
@@ -119,6 +104,25 @@ public class GameModeFileLoader extends PCGenTask
 				}
 
 			};
+
+
+	/**
+	 * Standard constructor, loads all game modes that are available.
+	 */
+	public GameModeFileLoader()
+	{
+		this.gameModeFilter = null;
+	}
+	/**
+	 * Specialized loader that only reads a subset of the game modes, presumably for
+	 * performance-critical or memory-limited applications.
+	 * @param gameModeFilter a non-null filter that will be invoked for each
+	 *     discovered game mode folder.
+	 */
+	public GameModeFileLoader(GameModeFilter gameModeFilter)
+	{
+		this.gameModeFilter = gameModeFilter;
+	}
 
 	@Override
 	public String getMessage()
@@ -744,4 +748,30 @@ public class GameModeFileLoader extends PCGenTask
 
 	}
 
+	/**
+	 * Allows a user to only load a subset of the available game modes to save memory and time.
+	 * If this filter is implemented, each game mode must pass all of the boolean tests to be loaded 
+	 */
+	public interface GameModeFilter
+	{
+		/**
+		 * This method will be called first during the game mode folder discovery phase.
+		 * @param gameModeDir a non-null folder, likely in the system/gameModes/ directory
+		 * @return false if this mode should not be loaded, or true if it should be loaded
+		 *     (but you can subsequently reject it via {@link #acceptMode(GameMode)})
+		 */
+		boolean acceptDir(File gameModeDir);
+
+		/**
+		 * Invoked after the game mode has been parsed. This method can be used, for example,
+		 * to filter on game mode metadata. At the time this method is invoked, the game mode has
+		 * not yet been added to the global registry.
+		 *  
+		 * @param gameMode a non-null {@link GameMode} instance
+		 * @return false if the campaign should not be parsed further and should
+		 *     not be added to the {@link SystemCollections#addToGameModeList(GameMode)}
+		 *     registry, or true if it should be.
+		 */
+		boolean acceptMode(GameMode gameMode);
+	}
 }
