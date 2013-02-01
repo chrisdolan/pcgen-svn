@@ -115,7 +115,9 @@ public abstract class CDOMObject extends ConcretePrereqObject implements
 	public final Integer put(IntegerKey key, Integer intValue)
 	{
 		if (integerChar == null)
+		{
 			integerChar = new HashMap<IntegerKey, Integer>();
+		}
 		return integerChar.put(key, intValue);
 	}
 
@@ -123,7 +125,9 @@ public abstract class CDOMObject extends ConcretePrereqObject implements
 	{
 		Integer out = integerChar == null ? null : integerChar.remove(key);
 		if (out != null && integerChar.isEmpty())
+		{
 			integerChar = null;
+		}
 		return out;
 	}
 
@@ -151,7 +155,9 @@ public abstract class CDOMObject extends ConcretePrereqObject implements
 	public final String put(StringKey key, String value)
 	{
 		if (stringChar == null)
+		{
 			stringChar = new HashMap<StringKey, String>();
+		}
 		return stringChar.put(key, value);
 	}
 
@@ -159,7 +165,9 @@ public abstract class CDOMObject extends ConcretePrereqObject implements
 	{
 		String out = stringChar == null ? null : stringChar.remove(key);
 		if (out != null && stringChar.isEmpty())
+		{
 			stringChar = null;
+		}
 		return out;
 	}
 
@@ -187,7 +195,9 @@ public abstract class CDOMObject extends ConcretePrereqObject implements
 	public final Formula put(FormulaKey key, Formula value)
 	{
 		if (formulaChar == null)
+		{
 			formulaChar = new HashMap<FormulaKey, Formula>();
+		}
 		return formulaChar.put(key, value);
 	}
 
@@ -195,7 +205,9 @@ public abstract class CDOMObject extends ConcretePrereqObject implements
 	{
 		Formula out = formulaChar == null ? null : formulaChar.remove(key);
 		if (out != null && formulaChar.isEmpty())
+		{
 			formulaChar = null;
+		}
 		return out;
 	}
 
@@ -222,7 +234,9 @@ public abstract class CDOMObject extends ConcretePrereqObject implements
 	public final Formula put(VariableKey key, Formula value)
 	{
 		if (variableChar == null)
+		{
 			variableChar = new HashMap<VariableKey, Formula>();
+		}
 		return variableChar.put(key, value);
 	}
 
@@ -230,7 +244,9 @@ public abstract class CDOMObject extends ConcretePrereqObject implements
 	{
 		Formula out = variableChar == null ? null : variableChar.remove(key);
 		if (out != null && variableChar.isEmpty())
+		{
 			variableChar = null;
+		}
 		return out;
 	}
 
@@ -258,7 +274,9 @@ public abstract class CDOMObject extends ConcretePrereqObject implements
 	public final <OT> OT put(ObjectKey<OT> key, OT value)
 	{
 		if (objectChar == null)
+		{
 			objectChar = new HashMap<ObjectKey<?>, Object>();
+		}
 		return key.cast(objectChar.put(key, value));
 	}
 
@@ -266,7 +284,9 @@ public abstract class CDOMObject extends ConcretePrereqObject implements
 	{
 		OT out = objectChar == null ? null : key.cast(objectChar.remove(key));
 		if (out != null && objectChar.isEmpty())
+		{
 			objectChar = null;
+		}
 		return out;
 	}
 
@@ -283,14 +303,18 @@ public abstract class CDOMObject extends ConcretePrereqObject implements
 	public final <T> void addToListFor(ListKey<T> key, T element)
 	{
 		if (listChar == null)
+		{
 			listChar = new ListKeyMapToList();
+		}
 		listChar.addToListFor(key, element);
 	}
 
 	public final <T> void addAllToListFor(ListKey<T> key, Collection<T> elementCollection)
 	{
 		if (listChar == null)
+		{
 			listChar = new ListKeyMapToList();
+		}
 		listChar.addAllToListFor(key, elementCollection);
 	}
 
@@ -340,7 +364,9 @@ public abstract class CDOMObject extends ConcretePrereqObject implements
 	{
 		List<T> out = listChar == null ? null : listChar.removeListFor(key);
 		if (out != null && listChar.isEmpty())
+		{
 			listChar = null;
+		}
 		return out;
 	}
 
@@ -369,7 +395,9 @@ public abstract class CDOMObject extends ConcretePrereqObject implements
 	public final <K, V> V addToMapFor(MapKey<K, V> mapKey, K key, V value)
 	{
 		if (mapChar == null)
+		{
 			mapChar = new MapKeyMap();
+		}
 		return mapChar.addToMapFor(mapKey, key, value);
 	}
 
@@ -385,7 +413,9 @@ public abstract class CDOMObject extends ConcretePrereqObject implements
 		{
 			boolean removed = mapChar.removeFromMapFor(mapKey, key);
 			if (removed && mapChar.isEmpty())
+			{
 				mapChar = null;
+			}
 		}
 	}
 
@@ -400,7 +430,9 @@ public abstract class CDOMObject extends ConcretePrereqObject implements
 		{
 			Map<K, V> removed = mapChar.removeMapFor(mapKey);
 			if (removed != null && mapChar.isEmpty())
+			{
 				mapChar = null;
+			}
 		}
 	}
 
@@ -456,7 +488,9 @@ public abstract class CDOMObject extends ConcretePrereqObject implements
 	{
 		boolean removed = mapChar == null ? false : mapChar.removeFromMapFor(mapKey, key2);
 		if (removed && mapChar.isEmpty())
+		{
 			mapChar = null;
+		}
 		return removed;
 	}
 
@@ -575,7 +609,9 @@ public abstract class CDOMObject extends ConcretePrereqObject implements
 			CDOMReference<T> granted, AssociatedPrereqObject associations)
 	{
 		if (cdomListMods == null)
+		{
 			cdomListMods = new DoubleKeyMapToList<CDOMReference<? extends CDOMList<? extends PrereqObject>>, CDOMReference<?>, AssociatedPrereqObject>(HashMap.class, LinkedHashMap.class);
+		}
 		cdomListMods.addToListFor(listRef, granted, associations);
 	}
 
@@ -586,7 +622,9 @@ public abstract class CDOMObject extends ConcretePrereqObject implements
 		if (cdomListMods != null) {
 			List<AssociatedPrereqObject> removed = cdomListMods.removeListFor(listRef, granted);
 			if (removed != null && cdomListMods.isEmpty())
+			{
 				cdomListMods = null;
+			}
 		}
 	}
 
@@ -651,49 +689,65 @@ public abstract class CDOMObject extends ConcretePrereqObject implements
 		if (cdo.integerChar != null)
 		{
 			if (integerChar == null)
+			{
 				integerChar = new HashMap<IntegerKey, Integer>();
+			}
 			integerChar.putAll(cdo.integerChar);
 		}
 		if (cdo.stringChar != null)
 		{
 			if (stringChar == null)
+			{
 				stringChar = new HashMap<StringKey, String>();
+			}
 			stringChar.putAll(cdo.stringChar);
 		}
 		if (cdo.formulaChar != null)
 		{
 			if (formulaChar == null)
+			{
 				formulaChar = new HashMap<FormulaKey, Formula>();
+			}
 			formulaChar.putAll(cdo.formulaChar);
 		}
 		if (cdo.objectChar != null)
 		{
 			if (objectChar == null)
+			{
 				objectChar = new HashMap<ObjectKey<?>, Object>();
+			}
 			objectChar.putAll(cdo.objectChar);
 		}
 		if (cdo.variableChar != null)
 		{
 			if (variableChar == null)
+			{
 				variableChar = new HashMap<VariableKey, Formula>();
+			}
 			variableChar.putAll(cdo.variableChar);
 		}
 		if (cdo.listChar != null)
 		{
 			if (listChar == null)
+			{
 				listChar = new ListKeyMapToList();
+			}
 			listChar.addAllLists(cdo.listChar);
 		}
 		if (cdo.mapChar != null)
 		{
 			if (mapChar == null)
+			{
 				mapChar = new MapKeyMap();
+			}
 			mapChar.putAll(cdo.mapChar);
 		}
 		if (cdo.cdomListMods != null)
 		{
 			if (cdomListMods == null)
+			{
 				cdomListMods = new DoubleKeyMapToList<CDOMReference<? extends CDOMList<? extends PrereqObject>>, CDOMReference<?>, AssociatedPrereqObject>(HashMap.class, LinkedHashMap.class);
+			}
 			cdomListMods.addAll(cdo.cdomListMods);
 		}
 	}
@@ -727,7 +781,9 @@ public abstract class CDOMObject extends ConcretePrereqObject implements
 		if (cdomListMods != null) {
 			MapToList<CDOMReference<?>, AssociatedPrereqObject> removed = cdomListMods.removeListsFor(listRef);
 			if (removed != null && cdomListMods.isEmpty())
+			{
 				cdomListMods = null;
+			}
 		}
 	}
 
