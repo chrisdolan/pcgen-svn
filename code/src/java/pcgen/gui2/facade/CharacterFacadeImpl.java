@@ -2006,6 +2006,7 @@ public class CharacterFacadeImpl implements CharacterFacade, EquipmentListListen
 	@Override
 	public void setName(String name)
 	{
+		assert pcgen.util.StrLenBreak.isInterned(name);
 		this.name.setReference(name);
 		theCharacter.setName(name);
 		if (isNewCharName(charDisplay.getName()))

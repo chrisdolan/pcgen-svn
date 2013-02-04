@@ -356,6 +356,7 @@ public class LoadInfo implements Loadable
     @Override
 	public void setName(String name)
 	{
+		assert pcgen.util.StrLenBreak.isInterned(name);
 		loadInfoName = name;
 	}
 

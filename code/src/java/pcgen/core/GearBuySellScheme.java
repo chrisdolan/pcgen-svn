@@ -123,6 +123,7 @@ public class GearBuySellScheme implements GearBuySellFacade
 	 */
 	public void setName(String name)
 	{
+		assert pcgen.util.StrLenBreak.isInterned(name);
 		this.name = name;
 	}
 

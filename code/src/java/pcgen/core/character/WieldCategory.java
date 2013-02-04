@@ -85,6 +85,7 @@ public final class WieldCategory implements Loadable
     @Override
 	public void setName(String name)
 	{
+		assert pcgen.util.StrLenBreak.isInterned(name);
 		categoryName = name;
 	}
 

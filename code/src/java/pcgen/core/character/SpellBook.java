@@ -144,6 +144,7 @@ public class SpellBook implements Cloneable
 	 */
 	public final void setName(String name)
 	{
+		assert pcgen.util.StrLenBreak.isInterned(name);
 		this.name = name;
 	}
 

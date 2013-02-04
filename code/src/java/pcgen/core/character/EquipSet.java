@@ -190,6 +190,7 @@ public final class EquipSet implements Comparable<EquipSet>, Cloneable
 	 */
 	public void setName(final String x)
 	{
+		assert pcgen.util.StrLenBreak.isInterned(x);
 		name = x;
 	}
 

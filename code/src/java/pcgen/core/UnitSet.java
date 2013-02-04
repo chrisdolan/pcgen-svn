@@ -139,6 +139,7 @@ public final class UnitSet implements Loadable
     @Override
 	public void setName(final String n)
 	{
+		assert pcgen.util.StrLenBreak.isInterned(n);
 		name = n;
 	}
 

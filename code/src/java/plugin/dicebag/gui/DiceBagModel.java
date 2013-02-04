@@ -156,6 +156,7 @@ public class DiceBagModel extends Observable
 	 */
 	public void setName(String string)
 	{
+		assert pcgen.util.StrLenBreak.isInterned(string);
 		m_changed = true;
 		m_name = string;
 	}

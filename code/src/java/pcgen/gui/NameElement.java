@@ -23,6 +23,7 @@ package pcgen.gui;
 import java.io.File;
 
 
+
 /**
  * @author soulcatcher
  */
@@ -51,6 +52,7 @@ public class NameElement implements Comparable<Object> {
 	 * @param name The name to set.
 	 */
 	public void setName(String name) {
+		assert pcgen.util.StrLenBreak.isInterned(name);
 		this.name = name;
 	}
 	

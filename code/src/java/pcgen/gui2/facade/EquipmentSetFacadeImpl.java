@@ -852,6 +852,7 @@ public class EquipmentSetFacadeImpl implements EquipmentSetFacade,
 	@Override
 	public void setName(String name)
 	{
+		assert pcgen.util.StrLenBreak.isInterned(name);
 		this.name.setReference(name);
 		eqSet.setName(name);
 	}

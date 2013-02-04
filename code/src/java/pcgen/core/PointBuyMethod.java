@@ -169,6 +169,7 @@ public final class PointBuyMethod implements BonusContainer, Loadable
     @Override
 	public void setName(String name)
 	{
+		assert pcgen.util.StrLenBreak.isInterned(name);
 		methodName = name;
 	}
 }

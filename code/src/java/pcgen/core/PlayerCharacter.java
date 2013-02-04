@@ -1871,6 +1871,7 @@ public class PlayerCharacter  implements Cloneable, VariableContainer, Associati
 	 */
 	public void setName(final String aString)
 	{
+		assert pcgen.util.StrLenBreak.isInterned(aString);
 		setStringFor(StringKey.NAME, aString);
 	}
 

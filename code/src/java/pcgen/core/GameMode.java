@@ -653,6 +653,7 @@ public final class GameMode implements Comparable<Object>, GameModeFacade
 	 */
 	public void setName(String name)
 	{
+		assert pcgen.util.StrLenBreak.isInterned(name);
 		this.name = name;
 	}
 

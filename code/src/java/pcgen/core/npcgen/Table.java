@@ -17,6 +17,7 @@ public class Table
 
 	public void setName( final String aName )
 	{
+		assert pcgen.util.StrLenBreak.isInterned(aName);
 		theName = aName;
 	}
 	

@@ -95,6 +95,7 @@ public final class Follower implements Comparable<Object>, Cloneable
 	 */
 	public void setName(final String x)
 	{
+		assert pcgen.util.StrLenBreak.isInterned(x);
 		name = x;
 	}
 

@@ -54,6 +54,7 @@ public abstract class GeneratorOption
 	 */
 	public void setName(final String aName)
 	{
+		assert pcgen.util.StrLenBreak.isInterned(aName);
 		theName = aName;
 	}
 

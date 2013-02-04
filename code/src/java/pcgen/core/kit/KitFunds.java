@@ -82,6 +82,7 @@ public final class KitFunds extends BaseKit
     @Override
 	public void setName(String value)
 	{
+		assert pcgen.util.StrLenBreak.isInterned(value);
 		name = value;
 	}
 

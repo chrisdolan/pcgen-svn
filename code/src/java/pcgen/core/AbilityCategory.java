@@ -469,6 +469,7 @@ public class AbilityCategory implements Category<Ability>, Loadable,
     @Override
 	public void setName(final String aName)
 	{
+    	assert pcgen.util.StrLenBreak.isInterned(aName);
 		if ("".equals(keyName))
 		{
 			keyName = aName;

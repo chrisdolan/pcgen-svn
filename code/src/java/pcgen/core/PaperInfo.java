@@ -125,6 +125,7 @@ public final class PaperInfo implements Loadable
     @Override
 	public void setName(String name)
 	{
+		assert pcgen.util.StrLenBreak.isInterned(name);
 		infoName = name;
 		paperInfo[0] = name;
 	}

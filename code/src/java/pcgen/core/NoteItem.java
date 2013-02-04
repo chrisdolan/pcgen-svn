@@ -77,6 +77,7 @@ public final class NoteItem implements NoteFacade, Cloneable
 
 	public void setName(final String x)
 	{
+		assert pcgen.util.StrLenBreak.isInterned(x);
 		name = x;
 	}
 
